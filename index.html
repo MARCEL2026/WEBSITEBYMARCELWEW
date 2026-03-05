@@ -3,27 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preview Coding Website</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        iframe { width: 100%; height: 400px; border: 1px solid #ccc; }
-    </style>
+    <!-- Tidak ada title yang kelihatan, karena ini full website -->
 </head>
-<body>
-    <h1>Preview Coding dari Website 1</h1>
-    <p>Code yang dimasukkan di Website 1 akan muncul otomatis di sini. Jika belum ada, masukkan dulu di Website 1.</p>
-    <iframe id="previewFrame"></iframe>
+<body style="margin:0; padding:0; overflow-x:hidden;">
+    <div id="loading" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#f0f0f0; display:flex; align-items:center; justify-content:center; font-family:Arial; color:#555; z-index:9999;">
+        Memuat website...
+    </div>
+
+    <iframe id="websiteFrame" style="width:100vw; height:100vh; border:none; position:fixed; top:0; left:0;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"></iframe>
 
     <script>
-        window.onload = function() {
-            const savedCode = localStorage.getItem('savedHTML');
-            if (savedCode) {
-                const iframe = document.getElementById('previewFrame');
-                iframe.srcdoc = savedCode;  // Render code sebagai dokumen di iframe
-            } else {
-                document.getElementById('previewFrame').srcdoc = '<p>Tidak ada code yang disimpan.</p>';
-            }
-        };
+        const savedCode = localStorage.getItem('myCustomWebsite');
+
+        const frame = document.getElementById('websiteFrame');
+        const loading = document.getElementById('loading');
+
+        if (savedCode && savedCode.trim() !== '') {
+            // Render kode sebagai dokumen lengkap
+            frame.srcdoc = savedCode;
+
+            // Hilangkan loading setelah iframe selesai render (kurang lebih)
+            frame.onload = function() {
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                }, 300);
+            };
+        } else {
+            // Jika belum ada kode sama sekali
+            frame.srcdoc = `
+                <!DOCTYPE html>
+                <html>
+                <head><title>Belum Ada Website</title></head>
+                <body style="margin:0; height:100vh; display:flex; align-items:center; justify-content:center; font-family:Arial; background:#f8f9fa; color:#666;">
+                    <div style="text-align:center;">
+                        <h2>Belum ada kode website</h2>
+                        <p>Kembali ke Website 1, masukkan kode HTML, lalu simpan.</p>
+                    </div>
+                </body>
+                </html>
+            `;
+            loading.style.display = 'none';
+        }
     </script>
 </body>
 </html>
