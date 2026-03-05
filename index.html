@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Coding Website</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        iframe { width: 100%; height: 400px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Preview Coding dari Website 1</h1>
+    <p>Code yang dimasukkan di Website 1 akan muncul otomatis di sini. Jika belum ada, masukkan dulu di Website 1.</p>
+    <iframe id="previewFrame"></iframe>
+
+    <script>
+        window.onload = function() {
+            const savedCode = localStorage.getItem('savedHTML');
+            if (savedCode) {
+                const iframe = document.getElementById('previewFrame');
+                iframe.srcdoc = savedCode;  // Render code sebagai dokumen di iframe
+            } else {
+                document.getElementById('previewFrame').srcdoc = '<p>Tidak ada code yang disimpan.</p>';
+            }
+        };
+    </script>
+</body>
+</html>
