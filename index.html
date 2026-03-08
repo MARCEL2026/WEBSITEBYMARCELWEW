@@ -1,49 +1,318 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Tidak ada title yang kelihatan, karena ini full website -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WELLCOME TO WEBSITE ALL GAMES BY MARCEL</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: radial-gradient(ellipse at bottom, #1a0000 0%, #000814 100%);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #ffeeee;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #fff, 0 0 25px #ff6b6b, 0 0 40px #ff4444;
+      animation: fall linear infinite, twinkle 2.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100vh) translateX(var(--x-start)); }
+      100% { transform: translateY(120vh) translateX(calc(var(--x-start) + var(--drift))); }
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    .bg-stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-star {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 50%;
+      opacity: 0.75;
+      animation: twinkle 4.5s infinite alternate;
+      box-shadow: 0 0 8px #ff9999;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 11vw, 9rem);
+      font-weight: 900;
+      letter-spacing: -3px;
+      background: linear-gradient(90deg, #ff6b6b, #ff4444, #c084fc, #ff6b6b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 60px rgba(255, 107, 107, 0.8);
+      margin-bottom: 0.3rem;
+    }
+
+    .subtitle {
+      font-size: clamp(1.5rem, 5.5vw, 2.6rem);
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1.8px;
+      text-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
+    }
+
+    .profile-frame {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      padding: 14px;
+      background: linear-gradient(45deg, #ff4444, #c084fc, #ff6b6b, #ff4444);
+      margin-bottom: 1.8rem;
+      box-shadow: 
+        0 0 70px rgba(255, 107, 107, 0.8),
+        0 0 120px rgba(192, 132, 252, 0.5),
+        inset 0 0 35px rgba(0,0,0,0.7);
+      transition: all 0.6s ease;
+      animation: fire-pulse 5s infinite alternate;
+    }
+
+    .profile-frame:hover {
+      transform: scale(1.15) rotate(8deg);
+      box-shadow: 
+        0 0 100px rgba(255, 107, 107, 1),
+        0 0 160px rgba(192, 132, 252, 0.8);
+    }
+
+    @keyframes fire-pulse {
+      0% { box-shadow: 0 0 70px rgba(255, 107, 107, 0.8), 0 0 120px rgba(192, 132, 252, 0.5); }
+      100% { box-shadow: 0 0 90px rgba(255, 107, 107, 1), 0 0 150px rgba(192, 132, 252, 0.7); }
+    }
+
+    .profile-frame img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid #0f001f;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.9);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.8rem;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-link {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .social-link:hover {
+      transform: translateY(-8px) scale(1.2);
+      box-shadow: 0 0 30px rgba(255, 107, 107, 0.9), 0 15px 40px rgba(0,0,0,0.5);
+    }
+
+    .social-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: transparent;
+    }
+
+    .community-section {
+      margin-top: 1rem;
+    }
+
+    .community-title {
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 0 15px rgba(255, 107, 107, 0.7);
+      letter-spacing: 1px;
+    }
+
+    .community-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .join-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: linear-gradient(45deg, #ff4444, #c084fc);
+      color: white;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+      transition: all 0.4s ease;
+      border: 2px solid #ff6b6b;
+    }
+
+    .join-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(255, 107, 107, 1), 0 10px 30px rgba(0,0,0,0.6);
+      background: linear-gradient(45deg, #ff6b6b, #a78bfa);
+    }
+
+    .join-btn img {
+      width: 28px;
+      height: 28px;
+    }
+
+    @media (max-width: 500px) {
+      .profile-frame { width: 220px; height: 220px; }
+      h1 { font-size: 4.5rem; }
+      .social-icons { gap: 1.2rem; }
+      .social-link { width: 50px; height: 50px; }
+      .join-btn { padding: 10px 18px; font-size: 0.95rem; }
+      .join-btn img { width: 24px; height: 24px; }
+    }
+  </style>
 </head>
-<body style="margin:0; padding:0; overflow-x:hidden;">
-    <div id="loading" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#f0f0f0; display:flex; align-items:center; justify-content:center; font-family:Arial; color:#555; z-index:9999;">
-        Memuat website...
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="bg-stars" id="bg-stars"></div>
+
+<div class="container">
+  <div class="profile-frame">
+    <img src="https://w0.peakpx.com/wallpaper/682/669/HD-wallpaper-flame-in-hand-trick-anonymous-flame-anonymus-artist-artwork-digital-art.jpg" 
+         alt="Marcel - Anonymous Flame Hood Profile">
+  </div>
+
+  <h1>MARCEL</h1>
+  <div class="subtitle">WELLCOME TO WEBSITE ALL GAMES BY MARCEL</div>
+
+  <!-- Social media icons dengan link asli -->
+  <div class="social-icons">
+    <a href="https://youtube.com/@yt.marcelindonesia?si=J_8tRk14bOikHkkD" target="_blank" class="social-link" title="YouTube">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/1024px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube">
+    </a>
+    <a href="https://www.tiktok.com/@marcelgaming1234?_r=1&_t=ZS-94W7beO8wD6" target="_blank" class="social-link" title="TikTok">
+      <img src="https://pngimg.com/uploads/tiktok/small/tiktok_PNG15.png" alt="TikTok">
+    </a>
+    <a href="https://www.instagram.com/marcel_agustian_trisno?igsh=MTQ5ZWhuejAxZHd5Mg==" target="_blank" class="social-link" title="Instagram">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+    </a>
+    <a href="https://www.facebook.com/share/14aNWU4H2qA/" target="_blank" class="social-link" title="Facebook">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+    </a>
+  </div>
+
+  <!-- Join Komunitas dengan link asli -->
+  <div class="community-section">
+    <div class="community-title">JOIN KOMUNITAS</div>
+    <div class="community-buttons">
+      <a href="https://discord.gg/Z8C5YVzxy" target="_blank" class="join-btn">
+        <img src="https://pngimg.com/uploads/discord/discord_PNG7.png" alt="Discord">
+        DISCORD KOMUNITAS
+      </a>
+      <a href="https://chat.whatsapp.com/H6ul5YhoFb13D5U3g7wpcD?mode=hqctcla" target="_blank" class="join-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+        WHATSAPP KOMUNITAS
+      </a>
+      <a href="https://whatsapp.com/channel/0029VbCAmPq6xCSMihvHSL3t" target="_blank" class="join-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Saluran WhatsApp">
+        SALURAN WHATSAPP
+      </a>
     </div>
+  </div>
+</div>
 
-    <iframe id="websiteFrame" style="width:100vw; height:100vh; border:none; position:fixed; top:0; left:0;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"></iframe>
+<script>
+// Background small stars
+function createBgStars() {
+  const bg = document.getElementById('bg-stars');
+  for(let i = 0; i < 250; i++) {
+    const star = document.createElement('div');
+    star.className = 'bg-star';
+    const size = Math.random() * 3.2 + 0.7;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 5 + 's';
+    bg.appendChild(star);
+  }
+}
 
-    <script>
-        const savedCode = localStorage.getItem('myCustomWebsite');
+// Shooting stars
+function createShootingStar() {
+  const container = document.getElementById('stars');
+  const star = document.createElement('div');
+  star.className = 'star';
 
-        const frame = document.getElementById('websiteFrame');
-        const loading = document.getElementById('loading');
+  const size = Math.random() * 4.5 + 2;
+  star.style.width = size + 'px';
+  star.style.height = size + 'px';
 
-        if (savedCode && savedCode.trim() !== '') {
-            // Render kode sebagai dokumen lengkap
-            frame.srcdoc = savedCode;
+  const duration = Math.random() * 8 + 5;
+  star.style.animationDuration = duration + 's';
 
-            // Hilangkan loading setelah iframe selesai render (kurang lebih)
-            frame.onload = function() {
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                }, 300);
-            };
-        } else {
-            // Jika belum ada kode sama sekali
-            frame.srcdoc = `
-                <!DOCTYPE html>
-                <html>
-                <head><title>Belum Ada Website</title></head>
-                <body style="margin:0; height:100vh; display:flex; align-items:center; justify-content:center; font-family:Arial; background:#f8f9fa; color:#666;">
-                    <div style="text-align:center;">
-                        <h2>Belum ada kode website</h2>
-                        <p>Kembali ke Website 1, masukkan kode HTML, lalu simpan.</p>
-                    </div>
-                </body>
-                </html>
-            `;
-            loading.style.display = 'none';
-        }
-    </script>
+  const xStart = Math.random() * 100;
+  const drift = (Math.random() - 0.5) * 600;
+
+  star.style.setProperty('--x-start', xStart + 'vw');
+  star.style.setProperty('--drift', drift + 'px');
+  star.style.left = xStart + 'vw';
+
+  container.appendChild(star);
+
+  setTimeout(() => star.remove(), (duration + 1) * 1000);
+}
+
+createBgStars();
+setInterval(createShootingStar, 650);
+
+for(let i = 0; i < 18; i++) {
+  setTimeout(createShootingStar, i * 300);
+}
+</script>
+
 </body>
 </html>
