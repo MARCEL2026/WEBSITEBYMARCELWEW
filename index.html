@@ -44,6 +44,11 @@
         .nav-link:hover:after {
             width: 100%;
         }
+        .step-active {
+            border-color: #00ff00;
+            background-color: #00ff00;
+            color: #000;
+        }
     </style>
 </head>
 <body class="bg-[#111111] text-white">
@@ -63,11 +68,10 @@
             <div class="hidden md:flex items-center gap-8 text-lg">
                 <a href="#" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" class="nav-link">BERANDA</a>
                 <a href="#" onclick="document.getElementById('fitur').scrollIntoView({behavior:'smooth'})" class="nav-link">FITUR</a>
+                <a href="#" onclick="mulaiPesanHosting()" class="nav-link">PESAN HOSTING</a>
                 <a href="#" onclick="document.getElementById('tipe-server').scrollIntoView({behavior:'smooth'})" class="nav-link">TIPE SERVER</a>
-                <a href="#" onclick="document.getElementById('harga').scrollIntoView({behavior:'smooth'})" class="nav-link">HARGA</a>
+                <a href="#" onclick="document.getElementById('kalkulator').scrollIntoView({behavior:'smooth'})" class="nav-link">KALKULATOR RAM</a>
                 <a href="#" onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})" class="nav-link">DASHBOARD</a>
-                <a href="#" class="nav-link">BLOG</a>
-                <a href="#" class="nav-link">SUPPORT</a>
             </div>
 
             <div class="flex items-center gap-4">
@@ -75,9 +79,9 @@
                    class="px-6 py-2 border-2 border-white hover:border-[#00ff00] hover:text-[#00ff00] font-medium transition-colors">
                     MASUK
                 </a>
-                <a onclick="showRegisterModal()" 
+                <a onclick="mulaiPesanHosting()" 
                    class="minecraft-button bg-[#00ff00] text-black px-8 py-2 font-bold text-lg rounded-none border-4 border-black">
-                    DAFTAR GRATIS
+                    PESAN SEKARANG
                 </a>
 
                 <!-- Mobile Menu Button -->
@@ -92,12 +96,12 @@
             <div class="flex flex-col gap-6 text-xl">
                 <a href="#" onclick="toggleMobileMenu()" class="nav-link">BERANDA</a>
                 <a href="#" onclick="toggleMobileMenu()" class="nav-link">FITUR</a>
+                <a href="#" onclick="toggleMobileMenu();mulaiPesanHosting()" class="nav-link">PESAN HOSTING</a>
                 <a href="#" onclick="toggleMobileMenu()" class="nav-link">TIPE SERVER</a>
-                <a href="#" onclick="toggleMobileMenu()" class="nav-link">HARGA</a>
-                <a href="#" onclick="toggleMobileMenu()" class="nav-link">DASHBOARD</a>
+                <a href="#" onclick="toggleMobileMenu()" class="nav-link">KALKULATOR RAM</a>
                 <div class="pt-6 border-t border-gray-700 flex flex-col gap-4">
                     <a onclick="showLoginModal();toggleMobileMenu()" class="text-center py-3 border-2">MASUK</a>
-                    <a onclick="showRegisterModal();toggleMobileMenu()" class="text-center py-3 bg-[#00ff00] text-black font-bold">DAFTAR SEKARANG</a>
+                    <a onclick="mulaiPesanHosting();toggleMobileMenu()" class="text-center py-3 bg-[#00ff00] text-black font-bold">PESAN SEKARANG</a>
                 </div>
             </div>
         </div>
@@ -122,7 +126,7 @@
                 </p>
 
                 <div class="flex flex-wrap gap-6">
-                    <button onclick="pesanSekarang()" 
+                    <button onclick="mulaiPesanHosting()" 
                             class="minecraft-button flex-1 md:flex-none bg-[#00ff00] hover:bg-white text-black text-2xl font-bold px-12 py-6 border-4 border-black flex items-center justify-center gap-4">
                         <i class="fa-solid fa-rocket"></i>
                         PESAN SEKARANG
@@ -153,15 +157,6 @@
                         <span>One-Click Modpack</span>
                     </div>
                 </div>
-
-                <div class="text-sm flex items-center gap-3">
-                    <span class="bg-[#00ff00] text-black px-4 py-1 font-bold">TRUSTED BY</span>
-                    <div class="flex gap-6 text-3xl opacity-70">
-                        <i class="fa-brands fa-discord"></i>
-                        <span class="minecraft-font">HYPIXEL</span>
-                        <span class="minecraft-font">CUBECRAFT</span>
-                    </div>
-                </div>
             </div>
 
             <!-- Hero Visual -->
@@ -173,10 +168,6 @@
                     <div class="absolute -top-6 -right-6 bg-black border-4 border-[#00ff00] px-6 py-3 text-[#00ff00] font-bold text-xl flex items-center gap-3">
                         <i class="fa-solid fa-circle-play animate-pulse"></i>
                         LIVE SERVER
-                    </div>
-                    <div class="absolute bottom-8 -left-8 bg-black border-4 border-white px-8 py-4 text-center">
-                        <div class="text-5xl font-black text-[#00ff00]">512</div>
-                        <div class="text-sm uppercase tracking-widest">Player Online</div>
                     </div>
                 </div>
             </div>
@@ -201,81 +192,75 @@
                 <div class="bg-black/80 border-4 border-[#00ff00] p-8 hover:border-white transition-all group">
                     <i class="fa-solid fa-bolt text-6xl text-[#00ff00] mb-6"></i>
                     <h3 class="text-2xl font-bold mb-2">PERFORMA SUPER CEPAT</h3>
-                    <p class="text-gray-400">Intel Xeon terbaru + NVMe SSD + 10Gbps network. Ping Indonesia < 30ms.</p>
-                    <div class="mt-8 text-[#00ff00] group-hover:underline">Pelajari lebih lanjut →</div>
+                    <p class="text-gray-400">Intel Xeon terbaru + NVMe SSD + 10Gbps network. Ping Indonesia &lt; 30ms.</p>
                 </div>
                 <div class="bg-black/80 border-4 border-[#00ff00] p-8 hover:border-white transition-all group">
                     <i class="fa-solid fa-shield-halved text-6xl text-[#00ff00] mb-6"></i>
                     <h3 class="text-2xl font-bold mb-2">PROTEKSI DDoS LEVEL 7</h3>
                     <p class="text-gray-400">Perlindungan serangan terbesar di Indonesia. Server kamu tetap hidup meski diserang.</p>
-                    <div class="mt-8 text-[#00ff00] group-hover:underline">Pelajari lebih lanjut →</div>
                 </div>
                 <div class="bg-black/80 border-4 border-[#00ff00] p-8 hover:border-white transition-all group">
                     <i class="fa-solid fa-plug text-6xl text-[#00ff00] mb-6"></i>
                     <h3 class="text-2xl font-bold mb-2">ONE-CLICK MODPACK</h3>
                     <p class="text-gray-400">Install 200+ modpack (Pixelmon, Skyblock, RLcraft, dll) hanya dengan 1 klik.</p>
-                    <div class="mt-8 text-[#00ff00] group-hover:underline">Pelajari lebih lanjut →</div>
                 </div>
                 <div class="bg-black/80 border-4 border-[#00ff00] p-8 hover:border-white transition-all group">
                     <i class="fa-solid fa-file-export text-6xl text-[#00ff00] mb-6"></i>
                     <h3 class="text-2xl font-bold mb-2">BACKUP OTOMATIS</h3>
                     <p class="text-gray-400">Backup setiap 6 jam ke Google Cloud. Restore kapan saja dalam 10 detik.</p>
-                    <div class="mt-8 text-[#00ff00] group-hover:underline">Pelajari lebih lanjut →</div>
                 </div>
                 <div class="bg-black/80 border-4 border-[#00ff00] p-8 hover:border-white transition-all group">
                     <i class="fa-solid fa-users text-6xl text-[#00ff00] mb-6"></i>
                     <h3 class="text-2xl font-bold mb-2">MULTI-VERSION</h3>
                     <p class="text-gray-400">Support 1.8 sampai 1.21.5 + Bedrock Edition + Velocity Proxy.</p>
-                    <div class="mt-8 text-[#00ff00] group-hover:underline">Pelajari lebih lanjut →</div>
                 </div>
                 <div class="bg-black/80 border-4 border-[#00ff00] p-8 hover:border-white transition-all group">
                     <i class="fa-solid fa-headset text-6xl text-[#00ff00] mb-6"></i>
                     <h3 class="text-2xl font-bold mb-2">SUPPORT 24/7 INDONESIA</h3>
                     <p class="text-gray-400">Tim support asli Indonesia siap bantu via Discord, WhatsApp &amp; Ticket.</p>
-                    <div class="mt-8 text-[#00ff00] group-hover:underline">Pelajari lebih lanjut →</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TIPE SERVER -->
+    <!-- TIPE SERVER (terpisah seperti proses pesanan) -->
     <section id="tipe-server" class="py-24 bg-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-5xl minecraft-font text-center mb-16">PILIH TIPE SERVER SESUAI KEBUTUHANMU</h2>
             <div class="grid md:grid-cols-4 gap-6">
-                <div class="text-center border-4 border-white p-8 hover:border-[#00ff00] transition-colors">
+                <div onclick="pilihTipeServer(this)" data-tipe="vanilla" class="cursor-pointer text-center border-4 border-white p-8 hover:border-[#00ff00] transition-colors">
                     <div class="text-6xl mb-6">🟢</div>
                     <h3 class="text-2xl font-bold">VANILLA</h3>
                     <p class="text-gray-400 mt-2">Pure Minecraft tanpa mod</p>
-                    <div class="mt-8 text-[#00ff00] text-sm">Cocok untuk survival klasik</div>
                 </div>
-                <div class="text-center border-4 border-[#00ff00] p-8 bg-[#00ff00]/10">
+                <div onclick="pilihTipeServer(this)" data-tipe="paper" class="cursor-pointer text-center border-4 border-[#00ff00] p-8 bg-[#00ff00]/10">
                     <div class="text-6xl mb-6">🔥</div>
                     <h3 class="text-2xl font-bold">SPIGOT / PAPER</h3>
                     <p class="text-gray-400 mt-2">Optimized untuk 100+ player</p>
                     <div class="mt-8 text-[#00ff00] text-sm font-bold">PALING POPULER</div>
                 </div>
-                <div class="text-center border-4 border-white p-8 hover:border-[#00ff00] transition-colors">
+                <div onclick="pilihTipeServer(this)" data-tipe="modded" class="cursor-pointer text-center border-4 border-white p-8 hover:border-[#00ff00] transition-colors">
                     <div class="text-6xl mb-6">🛠️</div>
                     <h3 class="text-2xl font-bold">FORGE / FABRIC</h3>
                     <p class="text-gray-400 mt-2">Modpack berat (Pixelmon, All the Mods)</p>
                 </div>
-                <div class="text-center border-4 border-white p-8 hover:border-[#00ff00] transition-colors">
+                <div onclick="pilihTipeServer(this)" data-tipe="bedrock" class="cursor-pointer text-center border-4 border-white p-8 hover:border-[#00ff00] transition-colors">
                     <div class="text-6xl mb-6">📱</div>
                     <h3 class="text-2xl font-bold">BEDROCK EDITION</h3>
                     <p class="text-gray-400 mt-2">Main bareng HP &amp; Console</p>
                 </div>
             </div>
+            <div id="tipe-selected" class="hidden mt-8 text-center text-[#00ff00] font-bold text-xl"></div>
         </div>
     </section>
 
-    <!-- HARGA / PAKET -->
+    <!-- HARGA / PAKET (langkah pertama pesanan) -->
     <section id="harga" class="py-24 block-bg">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-end mb-12">
                 <div>
-                    <span class="bg-[#00ff00] text-black px-6 py-1 text-sm">PAKET TERBAIK</span>
-                    <h2 class="text-5xl minecraft-font">PILIH PAKETMU</h2>
+                    <span class="bg-[#00ff00] text-black px-6 py-1 text-sm">LANGKAH 1 • PILIH PAKET HOSTING</span>
+                    <h2 class="text-5xl minecraft-font">PESAN HOSTINGAN</h2>
                 </div>
                 <div class="flex border-2 border-[#00ff00] rounded-none overflow-hidden">
                     <button onclick="toggleBilling(this)" id="monthlyBtn" 
@@ -297,7 +282,7 @@
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#00ff00]"></i> 1.8 - 1.21</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#00ff00]"></i> SSD 20 GB</li>
                     </ul>
-                    <button onclick="pesanSekarang()" class="w-full mt-12 py-5 border-4 border-[#00ff00] text-[#00ff00] font-bold hover:bg-[#00ff00] hover:text-black">PESAN STARTER</button>
+                    <button onclick="lanjutKeTipeServer(1)" class="w-full mt-12 py-5 border-4 border-[#00ff00] text-[#00ff00] font-bold hover:bg-[#00ff00] hover:text-black">PILIH PAKET INI →</button>
                 </div>
 
                 <!-- Card 2 (POPULER) -->
@@ -313,7 +298,7 @@
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check"></i> Backup Harian</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check"></i> Subdomain Gratis</li>
                     </ul>
-                    <button onclick="pesanSekarang()" class="w-full mt-12 py-5 bg-black text-[#00ff00] font-bold">PESAN PRO</button>
+                    <button onclick="lanjutKeTipeServer(2)" class="w-full mt-12 py-5 bg-black text-[#00ff00] font-bold">PILIH PAKET INI →</button>
                 </div>
 
                 <!-- Card 3 -->
@@ -327,7 +312,7 @@
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#00ff00]"></i> Velocity Proxy</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#00ff00]"></i> Custom Plugin</li>
                     </ul>
-                    <button onclick="pesanSekarang()" class="w-full mt-12 py-5 border-4 border-[#00ff00] text-[#00ff00] font-bold hover:bg-[#00ff00] hover:text-black">PESAN ADVANCED</button>
+                    <button onclick="lanjutKeTipeServer(3)" class="w-full mt-12 py-5 border-4 border-[#00ff00] text-[#00ff00] font-bold hover:bg-[#00ff00] hover:text-black">PILIH PAKET INI →</button>
                 </div>
 
                 <!-- Card 4 -->
@@ -341,7 +326,80 @@
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#00ff00]"></i> Dedicated IP</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#00ff00]"></i> Priority Support</li>
                     </ul>
-                    <button onclick="pesanSekarang()" class="w-full mt-12 py-5 border-4 border-[#00ff00] text-[#00ff00] font-bold hover:bg-[#00ff00] hover:text-black">PESAN GOD MODE</button>
+                    <button onclick="lanjutKeTipeServer(4)" class="w-full mt-12 py-5 border-4 border-[#00ff00] text-[#00ff00] font-bold hover:bg-[#00ff00] hover:text-black">PILIH PAKET INI →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KALKULATOR RAM (langkah akhir pesanan) -->
+    <section id="kalkulator" class="py-24 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="bg-[#00ff00] text-black px-6 py-1 text-sm">LANGKAH 3 • KUSTOMISASI</span>
+                <h2 class="text-5xl minecraft-font">KALKULATOR RAM SERVER</h2>
+                <p class="text-gray-400">Sesuaikan RAM, CPU, dan storage sesuai kebutuhanmu secara real-time</p>
+            </div>
+
+            <div class="bg-[#1a1a1a] border-4 border-[#00ff00] p-10 max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Input -->
+                    <div class="space-y-10">
+                        <div>
+                            <label class="block text-sm uppercase mb-3 font-bold">Jumlah Player Maksimal</label>
+                            <input type="range" id="playerSlider" min="10" max="300" value="50" step="10" 
+                                   class="w-full accent-[#00ff00] cursor-pointer">
+                            <div class="flex justify-between text-2xl font-bold mt-2">
+                                <span>10</span>
+                                <span id="playerValue" class="text-[#00ff00]">50</span>
+                                <span>300</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm uppercase mb-3 font-bold">Tipe Server</label>
+                            <select id="serverType" class="w-full bg-transparent border-4 border-white p-5 text-xl">
+                                <option value="vanilla">Vanilla / Pure</option>
+                                <option value="paper" selected>Spigot / Paper (Optimized)</option>
+                                <option value="modded">Forge / Fabric (Modded)</option>
+                                <option value="bedrock">Bedrock Edition</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <input type="checkbox" id="modpackCheck" class="accent-[#00ff00] w-8 h-8">
+                            <label for="modpackCheck" class="text-xl cursor-pointer">Pakai Modpack Besar (Pixelmon, ATM, dll)</label>
+                        </div>
+
+                        <button onclick="pesanDariKalkulator()" 
+                                class="w-full py-6 bg-[#00ff00] text-black text-2xl font-bold minecraft-button">
+                            PESAN SERVER DENGAN KONFIGURASI INI
+                        </button>
+                    </div>
+
+                    <!-- Hasil -->
+                    <div class="border-4 border-[#00ff00] p-8 text-center">
+                        <h3 class="uppercase text-sm mb-6 tracking-widest">REKOMENDASI SERVER</h3>
+                        
+                        <div class="space-y-8">
+                            <div>
+                                <div class="text-sm opacity-70">RAM YANG DIBUTUHKAN</div>
+                                <div id="ramResult" class="text-7xl font-black text-[#00ff00]">4 GB</div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <div class="text-sm opacity-70">CPU CORES</div>
+                                    <div id="cpuResult" class="text-5xl font-black text-[#00ff00]">3</div>
+                                </div>
+                                <div>
+                                    <div class="text-sm opacity-70">SSD STORAGE</div>
+                                    <div id="storageResult" class="text-5xl font-black text-[#00ff00]">40 GB</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tipe-selected-kalkulator" class="mt-8 text-sm font-bold text-[#00ff00]"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -393,71 +451,6 @@
                         INSTALL MODPACK
                     </button>
                 </div>
-                
-                <div class="mt-12 text-center text-sm opacity-60">
-                    Console live preview (demo):<br>
-                    <span class="font-mono text-[#00ff00]">[23:12:45] [Server] Player Marcel joined the game</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONI -->
-    <section class="py-24 block-bg">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-5xl minecraft-font text-center mb-16">APA KATA MEREKA?</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-black p-8 border-l-8 border-[#00ff00]">
-                    <p class="italic">"Server paling stabil yang pernah saya pakai di Indonesia. Ping selalu di bawah 25ms. Support-nya cepat banget!"</p>
-                    <div class="mt-8 flex items-center gap-4">
-                        <div class="w-12 h-12 bg-gray-700 rounded-full"></div>
-                        <div>
-                            <div class="font-bold">@ZackPlayz</div>
-                            <div class="text-sm text-gray-400">Owner Server Pixelmon 500+ player</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-black p-8 border-l-8 border-[#00ff00]">
-                    <p class="italic">"Upgrade dari hosting lain ke HostMC.id bikin server saya nggak pernah mati lagi. Harga juga lebih murah!"</p>
-                    <div class="mt-8 flex items-center gap-4">
-                        <div class="w-12 h-12 bg-gray-700 rounded-full"></div>
-                        <div>
-                            <div class="font-bold">@RizkyGamerID</div>
-                            <div class="text-sm text-gray-400">YouTuber Minecraft</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-black p-8 border-l-8 border-[#00ff00]">
-                    <p class="italic">"Bisa install All the Mods 10 dalam 2 menit. Super user-friendly. Rekomendasi banget!"</p>
-                    <div class="mt-8 flex items-center gap-4">
-                        <div class="w-12 h-12 bg-gray-700 rounded-full"></div>
-                        <div>
-                            <div class="font-bold">@NaufalMC</div>
-                            <div class="text-sm text-gray-400">Admin Server Modpack</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="py-24 bg-black">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-5xl minecraft-font text-center mb-16">PERTANYAAN YANG SERING DITANYAKAN</h2>
-            <div class="space-y-6">
-                <details class="bg-[#1a1a1a] p-6 border border-[#00ff00]">
-                    <summary class="font-bold cursor-pointer text-xl">Apakah support Bedrock Edition?</summary>
-                    <p class="mt-4 text-gray-300">Ya! Kami support penuh Bedrock + Java Edition di semua paket.</p>
-                </details>
-                <details class="bg-[#1a1a1a] p-6 border border-[#00ff00]">
-                    <summary class="font-bold cursor-pointer text-xl">Berapa lama proses setup server?</summary>
-                    <p class="mt-4 text-gray-300">Server langsung aktif dalam 30 detik setelah pembayaran berhasil.</p>
-                </details>
-                <details class="bg-[#1a1a1a] p-6 border border-[#00ff00]">
-                    <summary class="font-bold cursor-pointer text-xl">Bisa migrasi dari hosting lain?</summary>
-                    <p class="mt-4 text-gray-300">Bisa! Tim kami akan bantu migrasi world &amp; plugin secara gratis.</p>
-                </details>
             </div>
         </div>
     </section>
@@ -471,11 +464,6 @@
                     <h1 class="minecraft-font text-3xl">HostMC.id</h1>
                 </div>
                 <p class="text-gray-400">Hosting Minecraft terbaik di Indonesia. Cepat, stabil, dan murah.</p>
-                <div class="flex gap-6 mt-8 text-2xl">
-                    <i class="fa-brands fa-discord cursor-pointer hover:text-[#00ff00]"></i>
-                    <i class="fa-brands fa-whatsapp cursor-pointer hover:text-[#00ff00]"></i>
-                    <i class="fa-brands fa-instagram cursor-pointer hover:text-[#00ff00]"></i>
-                </div>
             </div>
             <div>
                 <h4 class="font-bold mb-6">PRODUK</h4>
@@ -490,7 +478,6 @@
                 <h4 class="font-bold mb-6">PERUSAHAAN</h4>
                 <ul class="space-y-3 text-gray-400">
                     <li>Tentang Kami</li>
-                    <li>Karir</li>
                     <li>Blog</li>
                     <li>Status Server</li>
                 </ul>
@@ -505,38 +492,31 @@
         </div>
     </footer>
 
-    <!-- MODAL LOGIN -->
+    <!-- MODAL LOGIN & REGISTER (sama seperti sebelumnya) -->
     <div onclick="if(event.target.id === 'loginModal')hideLoginModal()" 
          id="loginModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]">
         <div onclick="event.stopImmediatePropagation()" class="bg-black border-4 border-[#00ff00] w-full max-w-md p-10">
             <h2 class="text-3xl minecraft-font mb-8">MASUK KE PANEL</h2>
-            <input type="email" placeholder="Email atau Username" 
-                   class="w-full bg-transparent border-2 border-white p-5 mb-6 text-lg">
-            <input type="password" placeholder="Password" 
-                   class="w-full bg-transparent border-2 border-white p-5 mb-8 text-lg">
-            <button onclick="fakeLogin()" 
-                    class="w-full py-6 bg-[#00ff00] text-black text-2xl font-bold">MASUK</button>
+            <input type="email" placeholder="Email atau Username" class="w-full bg-transparent border-2 border-white p-5 mb-6 text-lg">
+            <input type="password" placeholder="Password" class="w-full bg-transparent border-2 border-white p-5 mb-8 text-lg">
+            <button onclick="fakeLogin()" class="w-full py-6 bg-[#00ff00] text-black text-2xl font-bold">MASUK</button>
             <p onclick="hideLoginModal()" class="text-center mt-8 text-sm cursor-pointer">Tutup</p>
         </div>
     </div>
 
-    <!-- MODAL REGISTER -->
     <div onclick="if(event.target.id === 'registerModal')hideRegisterModal()" 
          id="registerModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]">
         <div onclick="event.stopImmediatePropagation()" class="bg-black border-4 border-[#00ff00] w-full max-w-md p-10">
             <h2 class="text-3xl minecraft-font mb-8">BUAT AKUN BARU</h2>
-            <input type="text" placeholder="Username Minecraft" 
-                   class="w-full bg-transparent border-2 border-white p-5 mb-6 text-lg">
-            <input type="email" placeholder="Email" 
-                   class="w-full bg-transparent border-2 border-white p-5 mb-6 text-lg">
-            <button onclick="fakeRegister()" 
-                    class="w-full py-6 bg-[#00ff00] text-black text-2xl font-bold">DAFTAR &amp; DAPATKAN SERVER GRATIS 7 HARI</button>
+            <input type="text" placeholder="Username Minecraft" class="w-full bg-transparent border-2 border-white p-5 mb-6 text-lg">
+            <input type="email" placeholder="Email" class="w-full bg-transparent border-2 border-white p-5 mb-6 text-lg">
+            <button onclick="fakeRegister()" class="w-full py-6 bg-[#00ff00] text-black text-2xl font-bold">DAFTAR &amp; DAPATKAN SERVER GRATIS 7 HARI</button>
             <p onclick="hideRegisterModal()" class="text-center mt-8 text-sm cursor-pointer">Tutup</p>
         </div>
     </div>
 
     <script>
-        // Tailwind script already loaded
+        // Tailwind + basic script
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu')
             menu.classList.toggle('hidden')
@@ -566,28 +546,23 @@
 
         function fakeLogin() {
             hideLoginModal()
-            alert('✅ Login berhasil! Selamat datang di HostMC.id 🎉\n\n(Akses ke dashboard demo)')
-            setTimeout(() => {
-                document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' })
-            }, 800)
+            alert('✅ Login berhasil! Selamat datang di HostMC.id 🎉')
+            setTimeout(() => document.getElementById('dashboard').scrollIntoView({behavior:'smooth'}), 800)
         }
 
         function fakeRegister() {
             hideRegisterModal()
-            alert('🎉 Akun berhasil dibuat!\n\nKamu mendapatkan server GRATIS 7 hari.\nServer sedang dibuat...')
-            setTimeout(() => {
-                document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' })
-            }, 1200)
+            alert('🎉 Akun berhasil dibuat! Server GRATIS 7 hari sedang dibuat...')
+            setTimeout(() => document.getElementById('dashboard').scrollIntoView({behavior:'smooth'}), 1200)
         }
 
+        // Toggle billing (harga)
         function toggleBilling(btn) {
             document.querySelectorAll('#harga button').forEach(b => b.classList.remove('bg-[#00ff00]', 'text-black'))
             btn.classList.add('bg-[#00ff00]', 'text-black')
 
             const prices = document.querySelectorAll('#pricingCards .text-6xl')
-            
             if (btn.id === 'quarterlyBtn') {
-                // Diskon 15%
                 prices[0].textContent = 'Rp 41.650'
                 prices[1].textContent = 'Rp 84.150'
                 prices[2].textContent = 'Rp 152.150'
@@ -600,26 +575,100 @@
             }
         }
 
-        function pesanSekarang() {
-            alert('🚀 Terima kasih! Kamu akan diarahkan ke halaman checkout.\n\n(Demo: Pembayaran berhasil)')
-            setTimeout(() => {
-                document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' })
-            }, 1000)
+        // Mulai proses pesanan (baru)
+        function mulaiPesanHosting() {
+            document.getElementById('harga').scrollIntoView({behavior: 'smooth'})
         }
 
+        // Pilih paket → langsung ke tipe server
+        function lanjutKeTipeServer(paket) {
+            alert(`✅ Paket ${['STARTER','PRO','ADVANCED','GOD MODE'][paket-1]} dipilih!\n\nSekarang pilih tipe server...`)
+            document.getElementById('tipe-server').scrollIntoView({behavior: 'smooth'})
+        }
+
+        // Pilih tipe server (interaktif)
+        let tipeTerpilih = ''
+        function pilihTipeServer(el) {
+            document.querySelectorAll('#tipe-server > div > div').forEach(div => {
+                div.classList.remove('border-[#00ff00]', 'bg-[#00ff00]/10')
+                div.classList.add('border-white')
+            })
+            el.classList.add('border-[#00ff00]', 'bg-[#00ff00]/10')
+            
+            tipeTerpilih = el.dataset.tipe
+            document.getElementById('tipe-selected').innerHTML = `
+                ✅ Tipe server <span class="uppercase">${tipeTerpilih}</span> dipilih!<br>
+                <button onclick="lanjutKeKalkulator()" class="mt-4 px-8 py-3 bg-[#00ff00] text-black font-bold">LANJUT KE KALKULATOR RAM →</button>
+            `
+            document.getElementById('tipe-selected').classList.remove('hidden')
+        }
+
+        function lanjutKeKalkulator() {
+            document.getElementById('kalkulator').scrollIntoView({behavior: 'smooth'})
+        }
+
+        // KALKULATOR RAM
+        function updateCalculator() {
+            const players = parseInt(document.getElementById('playerSlider').value)
+            const type = document.getElementById('serverType').value
+            const isModpack = document.getElementById('modpackCheck').checked
+
+            let baseRAM = 1.5
+            let perPlayerRAM = 0.4
+            let baseStorage = 20
+
+            if (type === 'modded' || isModpack) {
+                baseRAM = 4
+                perPlayerRAM = 0.9
+                baseStorage = 50
+            } else if (type === 'paper') {
+                baseRAM = 2
+                perPlayerRAM = 0.5
+            } else if (type === 'bedrock') {
+                baseRAM = 1
+                perPlayerRAM = 0.3
+            }
+
+            const totalRAM = Math.ceil(baseRAM + (players / 10) * perPlayerRAM)
+            const cpuCores = Math.max(2, Math.ceil(players / 25))
+            const storage = Math.ceil(baseStorage + (players / 5) * 5 + (isModpack ? 30 : 0))
+
+            document.getElementById('playerValue').textContent = players
+            document.getElementById('ramResult').textContent = totalRAM + ' GB'
+            document.getElementById('cpuResult').textContent = cpuCores
+            document.getElementById('storageResult').textContent = storage + ' GB'
+
+            // Tampilkan tipe di kalkulator
+            const tipeText = type === 'vanilla' ? 'VANILLA' : 
+                           type === 'paper' ? 'SPIGOT/PAPER' : 
+                           type === 'modded' ? 'FORGE/FABRIC' : 'BEDROCK'
+            document.getElementById('tipe-selected-kalkulator').innerHTML = `TIPE SERVER: <span class="uppercase">${tipeText}</span>`
+        }
+
+        function pesanDariKalkulator() {
+            const ram = document.getElementById('ramResult').textContent
+            alert(`🚀 PESANAN BERHASIL!\n\nPaket terpilih + Tipe server + RAM ${ram}\n\nServer kamu sedang dibuat dan akan langsung muncul di Dashboard dalam 30 detik! 🎉`)
+            setTimeout(() => {
+                document.getElementById('dashboard').scrollIntoView({behavior: 'smooth'})
+            }, 1200)
+        }
+
+        // Lihat demo
         function lihatDemo() {
-            alert('🔥 Server demo sedang dimuat...\n\nKamu akan masuk ke server demo: play.hostmc.id\n\n(Contoh server live)')
+            alert('🔥 Membuka server demo HostMC.id...\n\nIP Demo: play.hostmc.id\n\n(Contoh server live)')
             window.open('https://www.minecraft.net', '_blank')
         }
 
-        // Konfeti saat halaman load
+        // Inisialisasi kalkulator
         window.onload = function() {
-            console.log('%c✅ Website HostMC.id siap digunakan! Buat oleh Grok untuk Marcel agustian trisno ❤️', 'color:#00ff00; font-family:monospace')
-            
-            // Auto scroll hint
-            if (window.innerWidth > 1024) {
-                console.log('Scroll ke bawah untuk melihat semua fitur lengkap!')
+            const slider = document.getElementById('playerSlider')
+            if (slider) {
+                slider.addEventListener('input', updateCalculator)
+                document.getElementById('serverType').addEventListener('change', updateCalculator)
+                document.getElementById('modpackCheck').addEventListener('change', updateCalculator)
+                updateCalculator() // pertama kali
             }
+            console.log('%c✅ Website HostMC.id sudah di-update! Proses pesanan: Paket → Tipe Server → Kalkulator RAM → Dashboard', 'color:#00ff00; font-family:monospace')
         }
     </script>
 </body>
