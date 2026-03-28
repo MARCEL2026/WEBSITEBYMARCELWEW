@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HostMC.id - Hosting Minecraft Terbaik di Indonesia. Server cepat, stabil, anti-lag. Pesan sekarang!">
+    <meta name="description" content="HostMC.id - Hosting Minecraft Terbaik di Indonesia">
     <title>HostMC.id • Hosting Minecraft Indonesia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -32,6 +32,7 @@
         .panel-tab { transition: all 0.2s; }
         .panel-tab.active { border-bottom: 4px solid #00ff00; color: #00ff00; }
         .console-line { animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="bg-[#111111] text-white">
@@ -58,7 +59,6 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden bg-black border-t-4 border-[#00ff00] py-6 px-6 space-y-6 text-xl">
             <a onclick="toggleMobileMenu();goToHome()" class="block">BERANDA</a>
             <a onclick="toggleMobileMenu();mulaiPesanHosting()" class="block">PESAN HOSTING</a>
@@ -67,21 +67,18 @@
         </div>
     </nav>
 
-    <!-- ==================== BERANDA ==================== -->
+    <!-- BERANDA -->
     <section id="home" class="hero-bg min-h-screen flex items-center">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
                 <div class="inline-flex bg-black/70 border-4 border-[#00ff00] px-6 py-3 text-sm font-bold tracking-widest">
                     <span class="text-[#00ff00] animate-pulse">●</span> &nbsp; 99.9% UPTIME • 14.872 SERVER AKTIF
                 </div>
-
                 <h1 class="text-6xl md:text-7xl font-black leading-none minecraft-font">
                     HOSTING<br>MINECRAFT<br><span class="text-[#00ff00]">INDONESIA</span>
                 </h1>
-
                 <p class="text-3xl text-gray-200">Server super cepat • Anti lag • Ping Indonesia &lt; 30ms<br>
                 <span class="text-[#00ff00]">Mulai hanya Rp49.000 / bulan</span></p>
-
                 <div class="flex flex-wrap gap-6">
                     <button onclick="mulaiPesanHosting()" class="minecraft-button bg-[#00ff00] text-black text-3xl font-bold px-16 py-7 border-4 border-black flex items-center gap-4">
                         <i class="fa-solid fa-rocket"></i> PESAN HOSTING SEKARANG
@@ -90,21 +87,14 @@
                         <i class="fa-solid fa-play"></i> LIHAT DEMO
                     </button>
                 </div>
-
-                <div class="flex gap-8 text-sm">
-                    <div class="flex items-center gap-3"><i class="fa-solid fa-shield-halved text-2xl text-[#00ff00]"></i> DDoS Protection</div>
-                    <div class="flex items-center gap-3"><i class="fa-solid fa-bolt text-2xl text-[#00ff00]"></i> NVMe SSD</div>
-                    <div class="flex items-center gap-3"><i class="fa-solid fa-headset text-2xl text-[#00ff00]"></i> Support 24/7</div>
-                </div>
             </div>
-
             <div class="hidden md:block relative">
                 <img src="https://images.unsplash.com/photo-1580894732444-3e2a6a5b3b3c?q=80&w=800" alt="Minecraft" class="w-[420px] border-8 border-[#00ff00] rotate-6 shadow-2xl shadow-[#00ff00]/60">
             </div>
         </div>
     </section>
 
-    <!-- ==================== FITUR ==================== -->
+    <!-- FITUR -->
     <section id="fitur" class="py-24 block-bg">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
@@ -131,41 +121,29 @@
         </div>
     </section>
 
-    <!-- ==================== PESAN HOSTING (LANGKAH 1-3) ==================== -->
+    <!-- PESAN HOSTING (LANGKAH 1-3) -->
     <section id="pesan-section" class="py-24 bg-black hidden">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-5xl minecraft-font text-center mb-4">PESAN HOSTINGAN</h2>
-            <p class="text-center text-gray-400 mb-12">Langkah 1 → Pilih Paket • Langkah 2 → Pilih Tipe • Langkah 3 → Kustomisasi</p>
+            <p class="text-center text-gray-400 mb-12">Langkah 1 → Pilih Paket • Langkah 2 → Pilih Tipe • Langkah 3 → Buat Server</p>
 
             <!-- PAKET -->
             <div class="mb-16">
-                <div class="flex justify-between items-end mb-8">
-                    <h3 class="text-3xl font-bold">1. PILIH PAKET</h3>
-                    <div class="flex border-4 border-[#00ff00] rounded-none overflow-hidden">
-                        <button onclick="toggleBilling(this)" id="monthlyBtn" class="px-8 py-3 font-bold bg-[#00ff00] text-black">BULANAN</button>
-                        <button onclick="toggleBilling(this)" id="quarterlyBtn" class="px-8 py-3 font-bold">3 BULAN (-15%)</button>
-                    </div>
-                </div>
+                <h3 class="text-3xl font-bold mb-8">1. PILIH PAKET</h3>
                 <div class="grid md:grid-cols-4 gap-6" id="pricingCards">
-                    <!-- Paket cards sama seperti sebelumnya (disingkat) -->
                     <div class="bg-black border-4 border-gray-500 p-8 hover:border-[#00ff00]">
                         <div class="uppercase text-sm">STARTER</div>
                         <div class="text-6xl font-black mt-4 mb-2" id="price1">Rp 49.000</div>
-                        <ul class="mt-8 space-y-4 text-sm">
-                            <li>2 GB RAM • 10 Slot</li>
-                        </ul>
+                        <ul class="mt-8 space-y-4 text-sm"><li>2 GB RAM • 10 Slot</li></ul>
                         <button onclick="pilihPaket(1)" class="w-full mt-10 py-6 border-4 border-[#00ff00] text-[#00ff00] font-bold">PILIH</button>
                     </div>
                     <div class="bg-[#00ff00] text-black border-4 border-[#00ff00] p-8 relative scale-110">
                         <div class="absolute -top-4 right-8 bg-black text-[#00ff00] text-xs px-8 py-1 font-bold">PALING LARIS</div>
                         <div class="uppercase text-sm">PRO</div>
                         <div class="text-6xl font-black mt-4 mb-2" id="price2">Rp 99.000</div>
-                        <ul class="mt-8 space-y-4 text-sm">
-                            <li>4 GB RAM • 30 Slot</li>
-                        </ul>
+                        <ul class="mt-8 space-y-4 text-sm"><li>4 GB RAM • 30 Slot</li></ul>
                         <button onclick="pilihPaket(2)" class="w-full mt-10 py-6 bg-black text-[#00ff00] font-bold">PILIH</button>
                     </div>
-                    <!-- Card 3 & 4 disingkat untuk ruang -->
                     <div class="bg-black border-4 border-gray-500 p-8 hover:border-[#00ff00]">
                         <div class="uppercase text-sm">ADVANCED</div>
                         <div class="text-6xl font-black mt-4 mb-2" id="price3">Rp 179.000</div>
@@ -182,41 +160,33 @@
             <!-- TIPE SERVER -->
             <div id="tipe-container" class="hidden">
                 <h3 class="text-3xl font-bold mb-8">2. PILIH TIPE SERVER SESUAI KEBUTUHANMU</h3>
-                <div class="grid md:grid-cols-4 gap-6" id="tipe-server-grid">
-                    <!-- Diisi via JS -->
-                </div>
+                <div class="grid md:grid-cols-4 gap-6" id="tipe-server-grid"></div>
             </div>
 
-            <!-- KALKULATOR -->
+            <!-- KALKULATOR / BUAT SERVER -->
             <div id="kalkulator-container" class="hidden mt-16">
-                <h3 class="text-3xl font-bold mb-8">3. KALKULATOR RAM &amp; KONFIGURASI</h3>
-                <div class="bg-[#1a1a1a] border-4 border-[#00ff00] p-10">
-                    <div class="grid md:grid-cols-2 gap-12">
-                        <div class="space-y-8">
-                            <div>
-                                <label class="block mb-2 font-bold">Jumlah Player Maksimal</label>
-                                <input type="range" id="playerSlider" min="10" max="500" value="50" class="w-full accent-[#00ff00]">
-                                <div class="flex justify-between mt-2"><span>10</span><span id="playerValue" class="text-3xl font-bold text-[#00ff00]">50</span><span>500</span></div>
-                            </div>
-                            <button onclick="buatServer()" class="w-full py-7 bg-[#00ff00] text-black text-3xl font-bold minecraft-button">BUAT SERVER SEKARANG</button>
-                        </div>
-                        <div id="kalkulator-result" class="text-center"></div>
-                    </div>
-                </div>
+                <h3 class="text-3xl font-bold mb-8">3. BUAT SERVER SEKARANG</h3>
+                <button onclick="buatServer()" class="w-full py-8 bg-[#00ff00] text-black text-4xl font-bold minecraft-button">BUAT SERVER &amp; MASUK KE PANEL</button>
             </div>
         </div>
     </section>
 
-    <!-- ==================== MY SERVERS / PANEL HOSTINGAN (HALAMAN TERPISAH) ==================== -->
+    <!-- MY SERVERS (HALAMAN TERPISAH) -->
     <section id="my-servers" class="py-24 bg-black hidden">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-5xl minecraft-font">MY SERVERS</h2>
-                <button onclick="buatServerBaru()" class="px-8 py-4 bg-[#00ff00] text-black font-bold">+ BUAT SERVER BARU</button>
+            <h2 id="my-servers-header" class="text-5xl minecraft-font mb-8">MY SERVERS</h2>
+
+            <!-- EMPTY STATE (belum punya server) -->
+            <div id="empty-state" class="hidden text-center py-20">
+                <i class="fa-solid fa-server text-8xl text-gray-600 mb-8"></i>
+                <h3 class="text-3xl font-bold mb-4">Anda belum mempunyai hosting server Minecraft</h3>
+                <p class="text-gray-400 mb-10">Pesan hosting sekarang dan server akan langsung muncul di sini</p>
+                <button onclick="mulaiPesanHosting()" class="minecraft-button bg-[#00ff00] text-black px-12 py-6 text-2xl font-bold">PESAN HOSTING SEKARANG</button>
             </div>
 
-            <div id="server-panel" class="bg-[#1a1a1a] border-8 border-[#00ff00] p-8 rounded-none">
-                <div class="flex justify-between border-b border-gray-700 pb-4">
+            <!-- SERVER PANEL (sudah punya server) -->
+            <div id="server-panel" class="hidden bg-[#1a1a1a] border-8 border-[#00ff00] p-8">
+                <div class="flex justify-between border-b border-gray-700 pb-6">
                     <div class="flex items-center gap-4">
                         <div id="server-icon" class="text-5xl">⧉</div>
                         <div>
@@ -230,6 +200,26 @@
                     </div>
                 </div>
 
+                <!-- RESOURCE SPECS (sesuai paket) -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8 mb-8">
+                    <div class="bg-black p-4 border border-[#00ff00]/30">
+                        <div class="text-xs uppercase">RAM</div>
+                        <div id="spec-ram" class="text-3xl font-bold text-[#00ff00]">0 / 4 GB</div>
+                    </div>
+                    <div class="bg-black p-4 border border-[#00ff00]/30">
+                        <div class="text-xs uppercase">CPU</div>
+                        <div id="spec-cpu" class="text-3xl font-bold text-[#00ff00]">0 / 2 GHz</div>
+                    </div>
+                    <div class="bg-black p-4 border border-[#00ff00]/30">
+                        <div class="text-xs uppercase">STORAGE</div>
+                        <div id="spec-ssd" class="text-3xl font-bold text-[#00ff00]">0 / 40 GB NVMe</div>
+                    </div>
+                    <div class="bg-black p-4 border border-[#00ff00]/30">
+                        <div class="text-xs uppercase">BANDWIDTH</div>
+                        <div id="spec-bandwidth" class="text-3xl font-bold text-[#00ff00]">0 / 100 Mbps (unmetered)</div>
+                    </div>
+                </div>
+
                 <!-- TABS -->
                 <div class="flex border-b border-gray-700 mt-8 mb-6 text-lg">
                     <button onclick="switchTab(0)" class="panel-tab px-8 py-4 active" id="tab-0">CONSOLE</button>
@@ -239,71 +229,65 @@
                     <button onclick="switchTab(4)" class="panel-tab px-8 py-4" id="tab-4">SETTINGS</button>
                 </div>
 
-                <!-- TAB CONTENT -->
+                <!-- CONSOLE TAB -->
                 <div id="tab-content-0" class="tab-content">
                     <div class="flex justify-between mb-4">
                         <div class="flex gap-4">
-                            <button onclick="serverAction('start')" class="px-6 py-3 bg-green-600 hover:bg-green-700">START</button>
-                            <button onclick="serverAction('stop')" class="px-6 py-3 bg-red-600 hover:bg-red-700">STOP</button>
-                            <button onclick="serverAction('restart')" class="px-6 py-3 bg-yellow-600 hover:bg-yellow-700">RESTART</button>
-                            <button onclick="serverAction('kill')" class="px-6 py-3 bg-gray-700 hover:bg-gray-800">KILL</button>
-                        </div>
-                        <div class="flex gap-8 text-sm">
-                            <div>RAM: <span id="ram-usage" class="text-[#00ff00]">2.4 / 4 GB</span></div>
-                            <div>CPU: <span id="cpu-usage" class="text-[#00ff00]">45%</span></div>
+                            <button onclick="serverAction('start')" class="px-8 py-3 bg-green-600 hover:bg-green-700 font-bold">START</button>
+                            <button onclick="serverAction('stop')" class="px-8 py-3 bg-red-600 hover:bg-red-700 font-bold">STOP</button>
+                            <button onclick="serverAction('restart')" class="px-8 py-3 bg-yellow-600 hover:bg-yellow-700 font-bold">RESTART</button>
+                            <button onclick="serverAction('kill')" class="px-8 py-3 bg-gray-700 hover:bg-gray-800 font-bold">KILL</button>
                         </div>
                     </div>
-                    <!-- Console -->
                     <div class="bg-black border-4 border-[#00ff00] h-96 p-6 font-mono text-sm overflow-y-auto" id="console-output">
-                        <div class="console-line">[18:22:11] Server started successfully!</div>
-                        <div class="console-line text-[#00ff00]">[18:22:12] Player Marcel joined the game</div>
-                        <div class="console-line">[18:22:15] World loaded (1.21.4)</div>
+                        <div class="console-line text-gray-400">[INFO] Server belum dijalankan. Klik START untuk memulai.</div>
                     </div>
                     <div class="flex mt-4">
-                        <input id="console-input" type="text" placeholder="Ketik command di sini..." 
-                               class="flex-1 bg-black border-4 border-[#00ff00] px-6 py-4 text-white focus:outline-none">
+                        <input id="console-input" type="text" placeholder="Ketik command..." class="flex-1 bg-black border-4 border-[#00ff00] px-6 py-4 focus:outline-none">
                         <button onclick="sendCommand()" class="px-12 bg-[#00ff00] text-black font-bold">KIRIM</button>
                     </div>
                 </div>
 
-                <!-- File Manager -->
+                <!-- FILE MANAGER TAB -->
                 <div id="tab-content-1" class="tab-content hidden">
                     <div class="flex justify-between mb-6">
-                        <h4 class="font-bold">FILE SERVER MINECRAFT</h4>
-                        <button onclick="autoInstallModpack()" class="px-6 py-3 border-4 border-[#00ff00] text-[#00ff00]">AUTO INSTALL MODPACK</button>
+                        <h4 class="font-bold text-xl">FILE SERVER MINECRAFT</h4>
+                        <button onclick="autoInstallModpack()" class="px-6 py-3 border-4 border-[#00ff00] text-[#00ff00] text-sm">AUTO INSTALL MODPACK</button>
                     </div>
                     <table class="w-full text-sm">
-                        <thead><tr class="border-b border-gray-700"><th class="text-left py-4">NAMA FILE</th><th class="text-left">UKURAN</th><th class="text-left">AKSI</th></tr></thead>
+                        <thead>
+                            <tr class="border-b border-gray-700">
+                                <th class="text-left py-4">NAMA FILE</th>
+                                <th class="text-left">UKURAN</th>
+                                <th class="text-left">AKSI</th>
+                            </tr>
+                        </thead>
                         <tbody id="file-list" class="font-mono"></tbody>
                     </table>
                 </div>
 
-                <!-- Database, Upgrade, Settings (dummy) -->
-                <div id="tab-content-2" class="tab-content hidden text-center py-20">DATABASE (MySQL untuk plugin) • Siap pakai</div>
-                <div id="tab-content-3" class="tab-content hidden text-center py-20">UPGRADE PLAN • Tingkatkan RAM / Slot dengan 1 klik</div>
-                <div id="tab-content-4" class="tab-content hidden text-center py-20">SETTINGS • Version, Subdomain, Backup, dll</div>
+                <!-- Dummy tabs -->
+                <div id="tab-content-2" class="tab-content hidden text-center py-20">DATABASE (MySQL) siap pakai</div>
+                <div id="tab-content-3" class="tab-content hidden text-center py-20">UPGRADE PLAN • Tambah RAM / Slot</div>
+                <div id="tab-content-4" class="tab-content hidden text-center py-20">SETTINGS • Version, Backup, Subdomain</div>
             </div>
         </div>
     </section>
 
-    <!-- MODALS -->
+    <!-- SUCCESS MODAL -->
     <div id="success-modal" onclick="if(event.target.id==='success-modal')hideModal()" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center z-[9999]">
         <div class="bg-black border-8 border-[#00ff00] max-w-lg w-full p-12 text-center">
             <h2 class="text-4xl minecraft-font">SERVER BERHASIL DIBUAT!</h2>
-            <p class="mt-6 text-xl">Server kamu sudah aktif dan siap digunakan.</p>
-            <button onclick="hideModal();showMyServers()" class="mt-10 px-16 py-6 bg-[#00ff00] text-black text-2xl font-bold">BUKA PANEL HOSTINGAN</button>
+            <p class="mt-6 text-xl">Server kamu sudah aktif dan otomatis masuk ke MY SERVERS</p>
+            <button onclick="hideModal();showMyServers()" class="mt-10 px-16 py-6 bg-[#00ff00] text-black text-2xl font-bold">BUKA MY SERVERS</button>
         </div>
     </div>
 
     <script>
+        let hasServer = false;
         let selectedPaket = null;
         let selectedTipe = null;
-        let serverData = {
-            name: "MyCoolSurvival",
-            type: "Paper",
-            ram: "4 GB",
-            ip: "play.hostmc.id:25565"
-        };
+        let currentServerSpecs = { ram: 4, cpu: 2, ssd: 40, bandwidth: 100 };
 
         function toggleMobileMenu() {
             document.getElementById('mobileMenu').classList.toggle('hidden');
@@ -322,13 +306,13 @@
             renderTipeServer();
         }
 
-        function toggleBilling(btn) {
-            document.querySelectorAll('#pesan-section button').forEach(b => b.classList.remove('bg-[#00ff00]', 'text-black'));
-            btn.classList.add('bg-[#00ff00]', 'text-black');
-        }
-
         function pilihPaket(n) {
             selectedPaket = n;
+            if (n === 1) currentServerSpecs = { ram: 2, cpu: 1, ssd: 20, bandwidth: 100 };
+            if (n === 2) currentServerSpecs = { ram: 4, cpu: 2, ssd: 40, bandwidth: 100 };
+            if (n === 3) currentServerSpecs = { ram: 8, cpu: 4, ssd: 80, bandwidth: 100 };
+            if (n === 4) currentServerSpecs = { ram: 16, cpu: 8, ssd: 200, bandwidth: 100 };
+            
             document.getElementById('tipe-container').classList.remove('hidden');
             document.getElementById('tipe-container').scrollIntoView({behavior: 'smooth'});
         }
@@ -349,25 +333,10 @@
             el.classList.add('border-[#00ff00]', 'bg-[#00ff00]/10');
             document.getElementById('kalkulator-container').classList.remove('hidden');
             document.getElementById('kalkulator-container').scrollIntoView({behavior: 'smooth'});
-            updateKalkulator();
-        }
-
-        function updateKalkulator() {
-            const slider = document.getElementById('playerSlider');
-            slider.oninput = function() {
-                const val = this.value;
-                document.getElementById('playerValue').textContent = val;
-                document.getElementById('kalkulator-result').innerHTML = `
-                    <div class="text-6xl font-black text-[#00ff00]">${Math.ceil(val/10) + 2} GB RAM</div>
-                    <div class="mt-8 text-xl">Tipe: ${selectedTipe.toUpperCase()}</div>
-                    <div class="text-sm text-gray-400">Server siap dalam 30 detik</div>
-                `;
-            };
         }
 
         function buatServer() {
-            serverData.type = selectedTipe ? selectedTipe.toUpperCase() : "PAPER";
-            serverData.ram = "4 GB";
+            hasServer = true;
             document.getElementById('success-modal').classList.remove('hidden');
             document.getElementById('success-modal').classList.add('flex');
         }
@@ -383,13 +352,24 @@
             document.getElementById('my-servers').classList.remove('hidden');
             document.getElementById('my-servers').scrollIntoView({behavior: 'smooth'});
 
-            // Isi panel dengan data server
-            document.getElementById('server-name').textContent = serverData.name;
-            document.getElementById('server-ip').textContent = serverData.ip;
-            document.getElementById('server-status').innerHTML = `<i class="fa-solid fa-circle"></i> ONLINE • ${serverData.type}`;
-            
-            // Render file manager dummy
-            renderFileManager();
+            if (!hasServer) {
+                document.getElementById('empty-state').classList.remove('hidden');
+                document.getElementById('server-panel').classList.add('hidden');
+                document.getElementById('my-servers-header').classList.add('hidden');
+            } else {
+                document.getElementById('empty-state').classList.add('hidden');
+                document.getElementById('server-panel').classList.remove('hidden');
+                document.getElementById('my-servers-header').classList.remove('hidden');
+
+                // Update specs sesuai paket yang dibeli
+                document.getElementById('spec-ram').innerHTML = `0 / ${currentServerSpecs.ram} GB`;
+                document.getElementById('spec-cpu').innerHTML = `0 / ${currentServerSpecs.cpu} GHz`;
+                document.getElementById('spec-ssd').innerHTML = `0 / ${currentServerSpecs.ssd} GB NVMe`;
+                document.getElementById('spec-bandwidth').innerHTML = `0 / ${currentServerSpecs.bandwidth} Mbps <span class="text-xs">(unmetered)</span>`;
+
+                // Reset file manager (kosong dulu)
+                document.getElementById('file-list').innerHTML = `<tr><td colspan="3" class="py-12 text-center text-gray-400">File server masih kosong.<br>Klik START untuk auto install file Minecraft sesuai pesanan.</td></tr>`;
+            }
         }
 
         function switchTab(n) {
@@ -401,9 +381,39 @@
 
         function serverAction(action) {
             const consoleEl = document.getElementById('console-output');
-            if (action === 'start') consoleEl.innerHTML += `<div class="console-line text-[#00ff00]">[SERVER] Server started!</div>`;
-            if (action === 'stop') consoleEl.innerHTML += `<div class="console-line text-red-500">[SERVER] Server stopped.</div>`;
+            
+            if (action === 'start') {
+                consoleEl.innerHTML = `<div class="console-line text-[#00ff00]">[18:22:11] Server starting...</div>`;
+                consoleEl.innerHTML += `<div class="console-line text-[#00ff00]">[18:22:15] Auto install file Minecraft sesuai paket ${selectedTipe || 'Paper'}...</div>`;
+                
+                // Auto install file server (seperti Limehost / Optiklink)
+                setTimeout(() => {
+                    renderFileManager();
+                    consoleEl.innerHTML += `<div class="console-line text-[#00ff00]">[18:22:45] Server started successfully! (files sudah terinstall)</div>`;
+                    consoleEl.scrollTop = consoleEl.scrollHeight;
+                }, 1200);
+            }
+            
+            if (action === 'stop') {
+                consoleEl.innerHTML += `<div class="console-line text-red-500">[18:23:10] Server stopped.</div>`;
+            }
             consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        function renderFileManager() {
+            const filesHTML = `
+                <tr class="border-b border-gray-700"><td class="py-4">server.jar</td><td>12 MB</td><td><button onclick="alert('File diedit')" class="text-[#00ff00]">EDIT</button></td></tr>
+                <tr class="border-b border-gray-700"><td class="py-4">world/</td><td>248 MB</td><td><button onclick="alert('Folder dibuka')" class="text-[#00ff00]">BUKA</button></td></tr>
+                <tr class="border-b border-gray-700"><td class="py-4">plugins/</td><td>87 MB</td><td><button onclick="alert('Folder dibuka')" class="text-[#00ff00]">BUKA</button></td></tr>
+                <tr class="border-b border-gray-700"><td class="py-4">paper.yml / spigot.yml</td><td>8 KB</td><td><button onclick="alert('File diedit')" class="text-[#00ff00]">EDIT</button></td></tr>
+                <tr><td class="py-4">mods/ (jika modded)</td><td>1.4 GB</td><td><button onclick="alert('Folder dibuka')" class="text-[#00ff00]">BUKA</button></td></tr>
+            `;
+            document.getElementById('file-list').innerHTML = filesHTML;
+        }
+
+        function autoInstallModpack() {
+            alert('✅ Modpack berhasil di-install otomatis sesuai tipe server yang kamu beli!');
+            renderFileManager();
         }
 
         function sendCommand() {
@@ -415,41 +425,17 @@
             input.value = '';
         }
 
-        function renderFileManager() {
-            const files = [
-                {name: "world/", size: "248 MB"},
-                {name: "plugins/", size: "87 MB"},
-                {name: "mods/", size: "1.4 GB"},
-                {name: "server.properties", size: "2 KB"},
-                {name: "paper.yml", size: "12 KB"}
-            ];
-            let html = '';
-            files.forEach(f => {
-                html += `<tr class="border-b border-gray-700"><td class="py-4">${f.name}</td><td>${f.size}</td><td><button onclick="alert('File dibuka! (demo)')" class="text-[#00ff00] text-xs">EDIT</button></td></tr>`;
-            });
-            document.getElementById('file-list').innerHTML = html;
-        }
-
-        function autoInstallModpack() {
-            alert('✅ Modpack berhasil di-install otomatis sesuai pesananmu!\n\n(Contoh: Pixelmon / All the Mods)');
-            renderFileManager();
-        }
-
-        function buatServerBaru() {
-            mulaiPesanHosting();
-        }
-
         function lihatDemo() {
-            alert('🔥 Server Demo aktif!\nIP: play.hostmc.id:25565\n\nSilakan join!');
+            alert('🔥 Server Demo aktif!\nIP: play.hostmc.id:25565\nSilakan join!');
         }
 
         function showLoginModal() {
-            alert('✅ Login berhasil (demo)\n\nSelamat datang kembali di HostMC.id!');
+            alert('✅ Login berhasil (demo)');
         }
 
         // Inisialisasi
         window.onload = () => {
-            console.log('%c✅ Website HostMC.id sudah di-perbaiki total sesuai permintaan!', 'color:#00ff00;font-family:monospace');
+            console.log('%c✅ Website HostMC.id sudah di-perbaiki total! MY SERVERS otomatis muncul setelah pesan selesai + empty state + specs + auto install file', 'color:#00ff00;font-family:monospace');
         };
     </script>
 </body>
