@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editor Website</title>
+    <title>Editor Website & Game</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,26 +13,41 @@
         }
         h1 { 
             text-align: center; 
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .file-section {
+            margin-bottom: 30px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background: white;
+            padding: 15px;
+        }
+        .file-header {
+            background: #0066ff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            margin: -15px -15px 15px -15px;
         }
         textarea {
             width: 100%;
-            height: 450px;
-            font-family: monospace;
+            height: 320px;
+            font-family: 'Courier New', monospace;
             font-size: 15px;
             padding: 12px;
-            border: 2px solid #333;
-            border-radius: 8px;
+            border: 1px solid #999;
+            border-radius: 6px;
             box-sizing: border-box;
         }
         .controls {
             text-align: center;
-            margin: 15px 0;
+            margin: 20px 0;
         }
         button {
-            padding: 12px 20px;
+            padding: 12px 25px;
             font-size: 16px;
-            margin: 6px;
+            margin: 8px;
             cursor: pointer;
             border: none;
             border-radius: 6px;
@@ -43,54 +58,138 @@
     </style>
 </head>
 <body>
-    <h1>Editor Website</h1>
-    
-    <div class="controls">
-        <button onclick="kirimKePreview()">🚀 Kirim ke Preview</button>
-        <button onclick="refreshPreview()">🔄 Refresh Preview</button>
-        <button onclick="window.location.reload()">🔃 Refresh Halaman Ini</button>
+    <h1>Editor Website & Game</h1>
+
+    <!-- Bagian index.html -->
+    <div class="file-section">
+        <div class="file-header">index.html</div>
+        <textarea id="html-code" placeholder="Tulis kode HTML di sini..."></textarea>
     </div>
 
-    <textarea id="code" placeholder="Masukkan codingan HTML kamu di sini...">
-<!DOCTYPE html>
+    <!-- Bagian style.css -->
+    <div class="file-section">
+        <div class="file-header">style.css</div>
+        <textarea id="css-code" placeholder="Tulis kode CSS di sini..."></textarea>
+    </div>
+
+    <!-- Bagian script.js -->
+    <div class="file-section">
+        <div class="file-header">script.js</div>
+        <textarea id="js-code" placeholder="Tulis kode JavaScript di sini..."></textarea>
+    </div>
+
+    <!-- Bagian main.xml -->
+    <div class="file-section">
+        <div class="file-header">main.xml</div>
+        <textarea id="xml-code" placeholder="Tulis kode XML di sini..."></textarea>
+    </div>
+
+    <div class="controls">
+        <button onclick="kirimKePreview()">🚀 Kirim index.html ke Preview</button>
+        <button onclick="refreshPreview()">🔄 Refresh Preview</button>
+        <button onclick="window.location.reload()">🔃 Refresh Semua</button>
+    </div>
+
+    <script>
+        // Load kode dari localStorage (agar tidak hilang saat refresh)
+        function loadCodes() {
+            document.getElementById('html-code').value = localStorage.getItem('html_code') || 
+`<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Saya</title>
+    <title>Game Saya</title>
     <style>
-        body { 
-            font-family: Arial; 
-            text-align: center; 
-            padding: 50px; 
-            background: linear-gradient(to right, #667eea, #764ba2);
-            color: white;
-        }
-        h1 { font-size: 3em; }
+        body { margin:0; background:#000; overflow:hidden; text-align:center; color:white; }
     </style>
 </head>
 <body>
-    <h1>Selamat Datang!</h1>
-    <p>Ini adalah contoh website yang akan muncul di preview.</p>
-</body>
-</html>
-    </textarea>
+    <h1>Selamat Datang di Game Saya</h1>
+    <canvas id="game" width="800" height="500"></canvas>
 
-    <script>
-        // Kirim ke Preview
-        function kirimKePreview() {
-            const code = document.getElementById('code').value;
-            const channel = new BroadcastChannel('website-preview');
-            channel.postMessage(code);
-            alert("✅ Codingan berhasil dikirim ke Preview!");
+    <script src="script.js"></script>
+</body>
+</html>`;
+
+            document.getElementById('css-code').value = localStorage.getItem('css_code') || 
+`body {
+    font-family: Arial, sans-serif;
+}
+canvas {
+    border: 3px solid white;
+    margin-top: 20px;
+}`;
+
+            document.getElementById('js-code').value = localStorage.getItem('js_code') || 
+`// Script JavaScript untuk game
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+
+let x = 100, y = 200, speedX = 4, speedY = 3;
+
+function gameLoop() {
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#00ff00';
+    ctx.fillRect(x, y, 60, 60);
+
+    x += speedX;
+    y += speedY;
+
+    if (x > canvas.width - 60 || x < 0) speedX *= -1;
+    if (y > canvas.height - 60 || y < 0) speedY *= -1;
+
+    requestAnimationFrame(gameLoop);
+}
+gameLoop();`;
+
+            document.getElementById('xml-code').value = localStorage.getItem('xml_code') || 
+`<?xml version="1.0" encoding="UTF-8"?>
+<game>
+    <player name="Hero" health="100" level="5"/>
+    <enemy name="Slime" health="30"/>
+    <settings>
+        <difficulty>medium</difficulty>
+        <sound>true</sound>
+    </settings>
+</game>`;
         }
 
-        // Refresh Preview
+        // Simpan semua kode ke localStorage
+        function saveCodes() {
+            localStorage.setItem('html_code', document.getElementById('html-code').value);
+            localStorage.setItem('css_code', document.getElementById('css-code').value);
+            localStorage.setItem('js_code', document.getElementById('js-code').value);
+            localStorage.setItem('xml_code', document.getElementById('xml-code').value);
+        }
+
+        // Kirim hanya index.html ke Preview
+        function kirimKePreview() {
+            saveCodes();
+            const htmlCode = document.getElementById('html-code').value;
+            
+            const channel = new BroadcastChannel('website-preview');
+            channel.postMessage(htmlCode);
+            
+            alert("✅ index.html berhasil dikirim ke Preview!");
+        }
+
         function refreshPreview() {
             const channel = new BroadcastChannel('website-preview');
             channel.postMessage("REFRESH");
             alert("🔄 Perintah refresh dikirim ke Preview!");
         }
+
+        // Simpan otomatis setiap 3 detik
+        setInterval(saveCodes, 3000);
+
+        // Load saat halaman dibuka
+        window.onload = loadCodes;
+
+        // Simpan saat meninggalkan halaman
+        window.addEventListener('beforeunload', saveCodes);
     </script>
 </body>
 </html>
