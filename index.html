@@ -1,179 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index1.html - Admin Panel (Input Coding & Publish)</title>
+    <title>Editor Website</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
-        body { background:#0f172a; color:#e2e8f0; padding:20px; }
-        .container { max-width:1100px; margin:auto; background:#1e2937; border-radius:16px; overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,0.3); }
-        header { background:#0ea5e9; color:white; padding:20px 30px; display:flex; align-items:center; justify-content:space-between; }
-        header h1 { font-size:24px; font-weight:600; }
-        .main { display:flex; gap:30px; padding:30px; }
-        .editor { flex:1; }
-        .sidebar { width:380px; background:#334155; border-radius:12px; padding:25px; }
-        textarea { width:100%; height:420px; background:#1e2937; border:2px solid #64748b; border-radius:12px; padding:20px; color:#e2e8f0; font-family:monospace; font-size:15px; resize:vertical; }
-        button { padding:12px 24px; border:none; border-radius:10px; font-weight:600; cursor:pointer; transition:all 0.3s; }
-        .btn-primary { background:#0ea5e9; color:white; }
-        .btn-primary:hover { background:#0284c8; transform:scale(1.05); }
-        .btn-success { background:#10b981; color:white; }
-        .btn-danger { background:#ef4444; color:white; }
-        .status-btn { padding:14px 28px; font-size:16px; margin:5px; }
-        .preview { margin-top:20px; border:2px solid #64748b; border-radius:12px; padding:20px; min-height:300px; background:#1e2937; overflow:auto; }
-        .section { margin-bottom:30px; }
-        .section h2 { margin-bottom:12px; color:#0ea5e9; font-size:18px; }
-        .input-group { display:flex; gap:12px; margin-bottom:15px; }
-        .input-group input { flex:1; padding:12px; border-radius:10px; border:2px solid #64748b; background:#1e2937; color:#e2e8f0; }
-        .info { background:#334155; padding:15px; border-radius:10px; font-size:14px; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 15px;
+            background: #f4f4f4;
+        }
+        h1 { 
+            text-align: center; 
+            margin-bottom: 15px;
+        }
+        textarea {
+            width: 100%;
+            height: 450px;
+            font-family: monospace;
+            font-size: 15px;
+            padding: 12px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .controls {
+            text-align: center;
+            margin: 15px 0;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            margin: 6px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🎛️ index1.html - ADMIN PANEL</h1>
-            <div style="font-size:15px; opacity:0.9;">Kelola Website • Publish otomatis ke index2.html</div>
-        </header>
-        
-        <div class="main">
-            <!-- EDITOR -->
-            <div class="editor">
-                <div class="section">
-                    <h2>1. Masukkan Codingan Website (HTML)</h2>
-                    <textarea id="codeInput" placeholder="Tulis HTML di sini... Contoh: &lt;h1&gt;Selamat Datang!&lt;/h1&gt;..."><h1 style="color:#0ea5e9; text-align:center;">🌐 Website Saya</h1>
-<p style="text-align:center; font-size:18px;">Ini konten default. Edit dan tekan PUBLISH!</p>
-<div style="background:#0ea5e9; color:white; padding:30px; border-radius:12px; text-align:center; margin:20px 0;">
-    <h2>Selamat Datang di Demo Website</h2>
-    <p>Kamu bisa masukkan codingan apapun di sini.</p>
-</div></textarea>
-                </div>
-                
-                <div style="display:flex; gap:15px;">
-                    <button onclick="publishContent()" class="btn-primary" style="flex:1; font-size:18px; padding:18px;">🚀 PUBLISH SEKARANG</button>
-                    <button onclick="previewContent()" class="btn-primary" style="background:#64748b;">👁️ Preview di sini</button>
-                </div>
-                
-                <div class="preview" id="previewArea">
-                    <p style="text-align:center; color:#64748b; margin-top:100px;">Preview akan muncul di sini setelah kamu klik Preview</p>
-                </div>
-            </div>
-            
-            <!-- SIDEBAR -->
-            <div class="sidebar">
-                
-                <!-- STATUS ONLINE / OFFLINE -->
-                <div class="section">
-                    <h2>2. Tombol Online / Offline</h2>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <button onclick="setStatus('online')" class="status-btn btn-success">✅ ONLINE</button>
-                        <button onclick="setStatus('offline')" class="status-btn btn-danger">❌ OFFLINE</button>
-                    </div>
-                    <div id="currentStatus" class="info" style="margin-top:15px; text-align:center; font-weight:600; font-size:18px;">
-                        Status saat ini: <span id="statusText">OFFLINE</span>
-                    </div>
-                </div>
-                
-                <!-- JADWAL REFRESH -->
-                <div class="section">
-                    <h2>3. Jadwal Refresh / Update</h2>
-                    <div class="input-group">
-                        <input type="date" id="scheduleDate">
-                        <input type="time" id="scheduleTime" value="20:45">
-                    </div>
-                    <button onclick="setSchedule()" class="btn-primary" style="width:100%;">📅 SET JADWAL PUBLISH</button>
-                    
-                    <div id="currentScheduleDisplay" class="info" style="margin-top:15px;">
-                        Jadwal saat ini: <strong>Belum ada</strong>
-                    </div>
-                    <small style="color:#94a3b8; display:block; margin-top:8px;">Contoh: 1/Agustus/2026 20:45 atau 15/Maret/2026 19:20</small>
-                </div>
-                
-                <div class="info" style="margin-top:auto;">
-                    <strong>Cara kerja:</strong><br>
-                    • Publish → otomatis muncul di index2.html<br>
-                    • Online/Offline → langsung berubah di index2.html<br>
-                    • Jadwal → muncul sebagai [REFRESH] di index2.html<br>
-                    • Buka index2.html di tab lain untuk lihat perubahan real-time
-                </div>
-            </div>
-        </div>
+    <h1>Editor Website</h1>
+    
+    <div class="controls">
+        <button onclick="kirimKePreview()">🚀 Kirim ke Preview</button>
+        <button onclick="refreshPreview()">🔄 Refresh Preview</button>
+        <button onclick="window.location.reload()">🔃 Refresh Halaman Ini</button>
     </div>
 
+    <textarea id="code" placeholder="Masukkan codingan HTML kamu di sini...">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Saya</title>
+    <style>
+        body { 
+            font-family: Arial; 
+            text-align: center; 
+            padding: 50px; 
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+        }
+        h1 { font-size: 3em; }
+    </style>
+</head>
+<body>
+    <h1>Selamat Datang!</h1>
+    <p>Ini adalah contoh website yang akan muncul di preview.</p>
+</body>
+</html>
+    </textarea>
+
     <script>
-        const months = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-        
-        // Load data saat halaman dibuka
-        function loadAdminData() {
-            // Load konten
-            const savedContent = localStorage.getItem('publishedHTML');
-            if (savedContent) document.getElementById('codeInput').value = savedContent;
-            
-            // Load status
-            const status = localStorage.getItem('siteStatus') || 'offline';
-            document.getElementById('statusText').textContent = status.toUpperCase();
-            document.getElementById('statusText').style.color = status === 'online' ? '#10b981' : '#ef4444';
-            
-            // Load jadwal
-            const jadwal = localStorage.getItem('nextRefresh');
-            if (jadwal) {
-                document.getElementById('currentScheduleDisplay').innerHTML = `
-                    Jadwal saat ini: <strong style="color:#0ea5e9;">[REFRESH] ${jadwal}</strong>
-                `;
-            }
+        // Kirim ke Preview
+        function kirimKePreview() {
+            const code = document.getElementById('code').value;
+            const channel = new BroadcastChannel('website-preview');
+            channel.postMessage(code);
+            alert("✅ Codingan berhasil dikirim ke Preview!");
         }
-        
-        // Publish konten
-        function publishContent() {
-            const code = document.getElementById('codeInput').value.trim();
-            if (!code) {
-                alert('❌ Tulis dulu codingan website-nya!');
-                return;
-            }
-            localStorage.setItem('publishedHTML', code);
-            alert('✅ BERHASIL! Codingan sudah dipublish. Buka index2.html untuk melihat hasilnya (otomatis muncul).');
+
+        // Refresh Preview
+        function refreshPreview() {
+            const channel = new BroadcastChannel('website-preview');
+            channel.postMessage("REFRESH");
+            alert("🔄 Perintah refresh dikirim ke Preview!");
         }
-        
-        // Preview di admin
-        function previewContent() {
-            const code = document.getElementById('codeInput').value;
-            document.getElementById('previewArea').innerHTML = code;
-        }
-        
-        // Set status online/offline
-        function setStatus(st) {
-            localStorage.setItem('siteStatus', st);
-            document.getElementById('statusText').textContent = st.toUpperCase();
-            document.getElementById('statusText').style.color = st === 'online' ? '#10b981' : '#ef4444';
-            alert(`✅ Status website sekarang ${st.toUpperCase()} dan akan langsung berubah di index2.html!`);
-        }
-        
-        // Set jadwal refresh
-        function setSchedule() {
-            const dateInput = document.getElementById('scheduleDate').value; // YYYY-MM-DD
-            const timeInput = document.getElementById('scheduleTime').value;   // HH:MM
-            
-            if (!dateInput || !timeInput) {
-                alert('❌ Isi tanggal dan jam dulu!');
-                return;
-            }
-            
-            const [year, monthNum, day] = dateInput.split('-');
-            const monthName = months[parseInt(monthNum) - 1];
-            const formatted = `${parseInt(day)}/${monthName}/${year} ${timeInput}`;
-            
-            localStorage.setItem('nextRefresh', formatted);
-            
-            document.getElementById('currentScheduleDisplay').innerHTML = `
-                Jadwal saat ini: <strong style="color:#0ea5e9;">[REFRESH] ${formatted}</strong>
-            `;
-            
-            alert(`✅ Jadwal berhasil disimpan!\n\nAkan muncul di index2.html sebagai:\n[REFRESH] ${formatted}`);
-        }
-        
-        // Auto load saat halaman dibuka
-        window.onload = loadAdminData;
     </script>
 </body>
 </html>
