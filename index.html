@@ -13,21 +13,24 @@
         }
         h1 { 
             text-align: center; 
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            color: #333;
         }
         .file-section {
-            margin-bottom: 30px;
-            border: 2px solid #ccc;
-            border-radius: 10px;
+            margin-bottom: 35px;
+            border: 2px solid #bbb;
+            border-radius: 12px;
             background: white;
             padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         .file-header {
-            background: #0066ff;
+            background: linear-gradient(to right, #0066ff, #3388ff);
             color: white;
-            padding: 10px 15px;
-            border-radius: 8px 8px 0 0;
+            padding: 12px 18px;
+            border-radius: 10px 10px 0 0;
             font-weight: bold;
+            font-size: 18px;
             margin: -15px -15px 15px -15px;
         }
         textarea {
@@ -35,65 +38,71 @@
             height: 320px;
             font-family: 'Courier New', monospace;
             font-size: 15px;
-            padding: 12px;
+            padding: 14px;
             border: 1px solid #999;
-            border-radius: 6px;
+            border-radius: 8px;
             box-sizing: border-box;
+            line-height: 1.5;
         }
         .controls {
             text-align: center;
-            margin: 20px 0;
+            margin: 30px 0;
         }
         button {
-            padding: 12px 25px;
-            font-size: 16px;
-            margin: 8px;
+            padding: 14px 32px;
+            font-size: 17px;
+            margin: 10px;
             cursor: pointer;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
+            background: #0066ff;
+            color: white;
         }
         button:hover {
-            opacity: 0.9;
+            background: #0055dd;
+        }
+        .note {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <h1>Editor Website & Game</h1>
 
-    <!-- Bagian index.html -->
+    <!-- index.html -->
     <div class="file-section">
-        <div class="file-header">index.html</div>
-        <textarea id="html-code" placeholder="Tulis kode HTML di sini..."></textarea>
+        <div class="file-header">index.html (Halaman Utama)</div>
+        <textarea id="index-html" placeholder="Kode untuk index.html"></textarea>
     </div>
 
-    <!-- Bagian style.css -->
+    <!-- lobby.html -->
     <div class="file-section">
-        <div class="file-header">style.css</div>
-        <textarea id="css-code" placeholder="Tulis kode CSS di sini..."></textarea>
+        <div class="file-header">lobby.html (Lobby / Menu)</div>
+        <textarea id="lobby-html" placeholder="Kode untuk lobby.html"></textarea>
     </div>
 
-    <!-- Bagian script.js -->
+    <!-- game.html -->
     <div class="file-section">
-        <div class="file-header">script.js</div>
-        <textarea id="js-code" placeholder="Tulis kode JavaScript di sini..."></textarea>
-    </div>
-
-    <!-- Bagian main.xml -->
-    <div class="file-section">
-        <div class="file-header">main.xml</div>
-        <textarea id="xml-code" placeholder="Tulis kode XML di sini..."></textarea>
+        <div class="file-header">game.html (Halaman Game)</div>
+        <textarea id="game-html" placeholder="Kode untuk game.html"></textarea>
     </div>
 
     <div class="controls">
-        <button onclick="kirimKePreview()">🚀 Kirim index.html ke Preview</button>
+        <button onclick="kirimSemuaKePreview()">🚀 Kirim ke Preview</button>
         <button onclick="refreshPreview()">🔄 Refresh Preview</button>
-        <button onclick="window.location.reload()">🔃 Refresh Semua</button>
+        <button onclick="window.location.reload()">🔃 Refresh Editor</button>
+    </div>
+
+    <div class="note">
+        Tulis kode di masing-masing halaman. Tombol "Kirim ke Preview" akan menggabungkan semuanya menjadi satu website.
     </div>
 
     <script>
-        // Load kode dari localStorage (agar tidak hilang saat refresh)
+        // Load kode dari localStorage
         function loadCodes() {
-            document.getElementById('html-code').value = localStorage.getItem('html_code') || 
+            document.getElementById('index-html').value = localStorage.getItem('index_html') || 
 `<!DOCTYPE html>
 <html lang="id">
 <head>
@@ -101,94 +110,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Saya</title>
     <style>
-        body { margin:0; background:#000; overflow:hidden; text-align:center; color:white; }
+        body { 
+            margin: 0; 
+            background: linear-gradient(#0f0c29, #302b63, #24243e); 
+            color: white; 
+            text-align: center; 
+            font-family: Arial; 
+            padding-top: 120px;
+        }
+        h1 { font-size: 3.5em; margin-bottom: 30px; }
+        button {
+            padding: 15px 40px;
+            font-size: 20px;
+            margin: 15px;
+            background: #ff3366;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <h1>Selamat Datang di Game Saya</h1>
-    <canvas id="game" width="800" height="500"></canvas>
-
-    <script src="script.js"></script>
+    <h1>Selamat Datang di Game</h1>
+    <button onclick="window.location.href='lobby.html'">Masuk ke Lobby</button>
 </body>
 </html>`;
 
-            document.getElementById('css-code').value = localStorage.getItem('css_code') || 
-`body {
-    font-family: Arial, sans-serif;
-}
-canvas {
-    border: 3px solid white;
-    margin-top: 20px;
-}`;
+            document.getElementById('lobby-html').value = localStorage.getItem('lobby_html') || 
+`<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+    <style>
+        body { 
+            margin: 0; 
+            background: #1a1a2e; 
+            color: white; 
+            text-align: center; 
+            padding: 80px 20px;
+            font-family: Arial;
+        }
+        .room { 
+            background: #16213e; 
+            padding: 40px; 
+            margin: 30px auto; 
+            max-width: 600px; 
+            border-radius: 20px;
+        }
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            background: #00cc66;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lobby Game</h1>
+    <div class="room">
+        <h2>Pilih Room</h2>
+        <button onclick="window.location.href='game.html'">Mulai Bermain</button>
+    </div>
+</body>
+</html>`;
 
-            document.getElementById('js-code').value = localStorage.getItem('js_code') || 
-`// Script JavaScript untuk game
-const canvas = document.getElementById('game');
-const ctx = canvas.getContext('2d');
+            document.getElementById('game-html').value = localStorage.getItem('game_html') || 
+`<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <style>
+        body { margin:0; background:#000; overflow:hidden; }
+        canvas { display:block; margin:40px auto; border: 5px solid #0ff; }
+        button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: #ff3366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='lobby.html'">Kembali ke Lobby</button>
+    <canvas id="game" width="800" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+        let x = 350, y = 200, speed = 7;
 
-let x = 100, y = 200, speedX = 4, speedY = 3;
+        function gameLoop() {
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ffff';
+            ctx.fillRect(x, y, 80, 80);
 
-function gameLoop() {
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+            x += speed;
+            if (x > canvas.width - 80 || x < 0) speed *= -1;
 
-    ctx.fillStyle = '#00ff00';
-    ctx.fillRect(x, y, 60, 60);
-
-    x += speedX;
-    y += speedY;
-
-    if (x > canvas.width - 60 || x < 0) speedX *= -1;
-    if (y > canvas.height - 60 || y < 0) speedY *= -1;
-
-    requestAnimationFrame(gameLoop);
-}
-gameLoop();`;
-
-            document.getElementById('xml-code').value = localStorage.getItem('xml_code') || 
-`<?xml version="1.0" encoding="UTF-8"?>
-<game>
-    <player name="Hero" health="100" level="5"/>
-    <enemy name="Slime" health="30"/>
-    <settings>
-        <difficulty>medium</difficulty>
-        <sound>true</sound>
-    </settings>
-</game>`;
+            requestAnimationFrame(gameLoop);
+        }
+        gameLoop();
+    <\/script>
+</body>
+</html>`;
         }
 
-        // Simpan semua kode ke localStorage
+        // Simpan kode
         function saveCodes() {
-            localStorage.setItem('html_code', document.getElementById('html-code').value);
-            localStorage.setItem('css_code', document.getElementById('css-code').value);
-            localStorage.setItem('js_code', document.getElementById('js-code').value);
-            localStorage.setItem('xml_code', document.getElementById('xml-code').value);
+            localStorage.setItem('index_html', document.getElementById('index-html').value);
+            localStorage.setItem('lobby_html', document.getElementById('lobby-html').value);
+            localStorage.setItem('game_html', document.getElementById('game-html').value);
         }
 
-        // Kirim hanya index.html ke Preview
-        function kirimKePreview() {
+        // Fungsi utama: Gabungkan semua menjadi satu file HTML dan kirim ke Preview
+        function kirimSemuaKePreview() {
             saveCodes();
-            const htmlCode = document.getElementById('html-code').value;
-            
+
+            const indexCode = document.getElementById('index-html').value;
+            const lobbyCode = document.getElementById('lobby-html').value;
+            const gameCode = document.getElementById('game-html').value;
+
+            // Gabungkan menjadi satu HTML lengkap dengan navigasi
+            const combinedHTML = `
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Multi Halaman</title>
+    <style>
+        body { margin:0; font-family: Arial, sans-serif; }
+        .page { display: none; min-height: 100vh; }
+        .active { display: block; }
+    </style>
+</head>
+<body>
+
+    <!-- Index Page -->
+    <div id="index-page" class="page active">
+        ${indexCode.replace(/<html[^>]*>|<head[^>]*>|<body[^>]*>|<\/html>|<\/head>|<\/body>/gi, '')}
+    </div>
+
+    <!-- Lobby Page -->
+    <div id="lobby-page" class="page">
+        ${lobbyCode.replace(/<html[^>]*>|<head[^>]*>|<body[^>]*>|<\/html>|<\/head>|<\/body>/gi, '')}
+    </div>
+
+    <!-- Game Page -->
+    <div id="game-page" class="page">
+        ${gameCode.replace(/<html[^>]*>|<head[^>]*>|<body[^>]*>|<\/html>|<\/head>|<\/body>/gi, '')}
+    </div>
+
+    <script>
+        // Navigasi sederhana antar halaman
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+    <\/script>
+</body>
+</html>`;
+
             const channel = new BroadcastChannel('website-preview');
-            channel.postMessage(htmlCode);
+            channel.postMessage(combinedHTML);
             
-            alert("✅ index.html berhasil dikirim ke Preview!");
+            alert("✅ Semua halaman telah digabungkan dan dikirim ke Preview!");
         }
 
         function refreshPreview() {
             const channel = new BroadcastChannel('website-preview');
             channel.postMessage("REFRESH");
-            alert("🔄 Perintah refresh dikirim ke Preview!");
         }
 
-        // Simpan otomatis setiap 3 detik
+        // Auto save
         setInterval(saveCodes, 3000);
 
-        // Load saat halaman dibuka
         window.onload = loadCodes;
-
-        // Simpan saat meninggalkan halaman
         window.addEventListener('beforeunload', saveCodes);
     </script>
 </body>
